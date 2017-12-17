@@ -25,11 +25,11 @@ class Net(nn.Module):
 
     def forward(self, x):
         for i in x.shape[0]:
-            x[i] = F.max_pool2d(F.relu(self.conv1(x[i])), 2)
+            x[i] = F.relu(F.max_pool2d(self.conv1(x[i]), 2))
             # x = F.relu(F.max_pool2d(self.conv1(x), 2))
-            x[i] = F.max_pool2d(F.relu(self.conv2(x[i])), 2)
+            x[i] = F.relu(F.max_pool2d(self.conv2(x[i]), 2))
             # x = F.relu(F.max_pool2d(self.conv2(x), 2))
-            x[i] = F.max_pool2d(F.relu(self.conv32(self.conv31(x[i]))), 2)
+            x[i] = F.relu(F.max_pool2d(self.conv32(self.conv31(x[i])), 2))
             # x = F.relu(F.max_pool2d(self.conv3(x), 2))
         x = x.view(-1, 2048)
         x = F.relu(self.fc1(x))
